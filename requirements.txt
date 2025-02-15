@@ -1,2 +1,11 @@
 requests
 lxml
+beautifulsoup4
+weaviate-client
+openai
+markdownify
+neo4j
+pandas
+nltk
+jsonschema
+sentence-transformers
