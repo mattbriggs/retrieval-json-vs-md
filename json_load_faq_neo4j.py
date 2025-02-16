@@ -175,7 +175,6 @@ def link_similar_faqs():
     run_query(query)
     print("✅ Created relationships between similar FAQ entries.")
 
-
 # ==============================================================
 # STEP 5: ANSWER QUESTIONS WITH CYPHER
 # ==============================================================
