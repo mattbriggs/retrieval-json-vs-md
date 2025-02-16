@@ -4,8 +4,8 @@ import nltk
 from bs4 import BeautifulSoup
 
 # 🔹 Configure paths
-JSONLD_FOLDER = "path/to/jsonld"
-HTML_FOLDER = "path/to/html"
+JSONLD_FOLDER = "/Users/mattbriggs/Data/retrievaldata/JSONLD"
+HTML_FOLDER = "/Users/mattbriggs/Data/retrievaldata/HTML"
 OUTPUT_FILE = "golden_questions.json"
 
 # 🔹 Setup NLTK (for basic text cleaning)
@@ -16,20 +16,29 @@ nltk.download("punkt")
 # ==============================================================
 
 def extract_faq_from_jsonld(jsonld_folder):
-    """Extract questions and answers from JSON-LD FAQPage schemas."""
+    """Extract questions and answers from JSON-LD FAQPage schemas, handling HTML answers."""
     golden_data = []
     
     for file in os.listdir(jsonld_folder):
-        if file.endswith(".jsonld"):
+        if file.endswith(".json"):
             with open(os.path.join(jsonld_folder, file), "r", encoding="utf-8") as f:
                 data = json.load(f)
-                
+
+                # Handle if JSON-LD is wrapped in a list
+                if isinstance(data, list):
+                    data = data[0]  # Extract first object if it's a list
+
                 if "@type" in data and data["@type"] == "FAQPage":
                     for qa in data.get("mainEntity", []):
-                        question = qa.get("name", "").strip()
-                        answer = qa.get("acceptedAnswer", {}).get("text", "").strip()
-                        if question and answer:
-                            golden_data.append({"question": question, "expected_answer": answer})
+                        if qa.get("@type") == "Question":
+                            question = qa.get("name", "").strip()
+                            answer_html = qa.get("acceptedAnswer", {}).get("text", "").strip()
+                            
+                            # Convert HTML answers to plain text
+                            answer_text = BeautifulSoup(answer_html, "html.parser").get_text(separator=" ")
+
+                            if question and answer_text:
+                                golden_data.append({"question": question, "expected_answer": answer_text})
 
     print(f"✅ Extracted {len(golden_data)} questions from JSON-LD.")
     return golden_data
@@ -39,7 +48,7 @@ def extract_faq_from_jsonld(jsonld_folder):
 # ==============================================================
 
 def extract_faq_from_html(html_folder):
-    """Extract questions and answers from HTML FAQ sections."""
+    """Extract questions and answers from HTML FAQ sections, handling nested content properly."""
     golden_data = []
 
     for file in os.listdir(html_folder):
@@ -47,12 +56,22 @@ def extract_faq_from_html(html_folder):
             with open(os.path.join(html_folder, file), "r", encoding="utf-8") as f:
                 soup = BeautifulSoup(f, "html.parser")
 
-                faq_sections = soup.find_all("section", {"class": "faq"})
-                for section in faq_sections:
-                    for q in section.find_all("h2"):  # Assuming questions are in <h2> tags
-                        answer = q.find_next_sibling("p")  # Assuming answer is the next paragraph
-                        if q and answer:
-                            golden_data.append({"question": q.get_text(strip=True), "expected_answer": answer.get_text(strip=True)})
+                # Find the FAQ content container
+                faq_section = soup.find("section", id="faq-content-container")
+                if faq_section:
+                    # Iterate through h3 elements (questions) and extract their answers
+                    for question_tag in faq_section.find_all("h3"):
+                        question = question_tag.get_text(strip=True)
+
+                        # The answer is typically in the next div with class 'content'
+                        answer_div = question_tag.find_next_sibling("div", class_="content")
+
+                        if answer_div:
+                            # Extract text while preserving paragraph structure
+                            answer_text = ' '.join(p.get_text(strip=True) for p in answer_div.find_all("p"))
+
+                            if question and answer_text:
+                                golden_data.append({"question": question, "expected_answer": answer_text})
 
     print(f"✅ Extracted {len(golden_data)} questions from HTML.")
     return golden_data
