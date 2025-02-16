@@ -100,6 +100,82 @@ If occupied, stop the process or run Weaviate on a different port (`-p 9090:8080
 
 ---
 
+## Clean up Docker
+
+### 🛑 **How to Clean Up Docker When You're Done** 🛑
+
+If you're finished with Weaviate or other Docker containers, follow these steps to **clean up your system** and **free up disk space**.
+
+---
+
+## **🧹 Step 1: Stop and Remove the Weaviate Container**
+1. **Find the running Weaviate container**:
+   ```sh
+   docker ps
+   ```
+   - Look for a container with the **name** or **image** related to Weaviate (e.g., `weaviate/weaviate`).
+
+2. **Stop the Weaviate container**:
+   ```sh
+   docker stop <container_id>
+   ```
+   - Replace `<container_id>` with the actual container ID from the `docker ps` command.
+
+3. **Remove the stopped Weaviate container**:
+   ```sh
+   docker rm <container_id>
+   ```
+   - This removes the container instance but **not the image**.
+
+---
+
+## **🗑️ Step 2: Remove Unused Docker Images**
+If you **want to remove the Weaviate image**, run:
+```sh
+docker images
+```
+Find the **Weaviate image ID** and remove it:
+```sh
+docker rmi <image_id>
+```
+
+---
+
+## **🛠️ Step 3: Remove Docker Networks & Volumes (Optional)**
+To **delete any Docker networks** associated with Weaviate:
+```sh
+docker network prune
+```
+
+To **delete any Docker volumes** associated with Weaviate:
+```sh
+docker volume prune
+```
+
+---
+
+## **🚀 Step 4: Full Cleanup (Only If Needed)**
+If you **want to completely clean up all stopped containers, unused images, networks, and volumes**, run:
+```sh
+docker system prune -a
+```
+⚠️ **Warning:** This will remove **all unused containers, images, volumes, and networks**, so use it with caution!
+
+---
+
+## **✅ Step 5: Verify Cleanup**
+To check that Weaviate is gone:
+```sh
+docker ps -a  # Should not list Weaviate
+docker images  # Should not list Weaviate image
+```
+
+Now, your system is **clean and free of Docker leftovers**!
+
+---
+
+
+
 ## **Next Steps**
 You now have Weaviate running in Docker on macOS. Next, you can:
 - Load data into Weaviate
