@@ -1,0 +1,125 @@
+{
+    "average_f1": -0.039220152469351885,
+    "results": [
+        {
+            "question": "What is the deepest point in the Pacific Ocean?",
+            "expected_answer": "The Mariana Trench is the deepest point in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.04769086837768555
+        },
+        {
+            "question": "Which continent does the Pacific Ocean not touch?",
+            "expected_answer": "The Pacific Ocean does not touch Africa.",
+            "retrieved_answer": "",
+            "f1_score": -0.056861087679862976
+        },
+        {
+            "question": "What is the largest ocean on Earth?",
+            "expected_answer": "The Pacific Ocean is the largest ocean on Earth.",
+            "retrieved_answer": "",
+            "f1_score": -0.04670736938714981
+        },
+        {
+            "question": "Which country has the longest Pacific Ocean coastline?",
+            "expected_answer": "Canada has the longest Pacific Ocean coastline.",
+            "retrieved_answer": "",
+            "f1_score": -0.04914950206875801
+        },
+        {
+            "question": "What natural phenomenon occurs in the Pacific Ocean due to tectonic activity?",
+            "expected_answer": "Earthquakes and tsunamis frequently occur in the Pacific Ocean due to tectonic activity.",
+            "retrieved_answer": "",
+            "f1_score": -0.05785549432039261
+        },
+        {
+            "question": "What current affects the western coast of North America?",
+            "expected_answer": "The California Current affects the western coast of North America.",
+            "retrieved_answer": "",
+            "f1_score": -0.03480944782495499
+        },
+        {
+            "question": "What is the name of the warm ocean current that influences global weather patterns?",
+            "expected_answer": "El Ni\u00f1o is the warm ocean current that influences global weather patterns.",
+            "retrieved_answer": "",
+            "f1_score": -0.039102278649806976
+        },
+        {
+            "question": "Which large marine garbage patch is found in the Pacific Ocean?",
+            "expected_answer": "The Great Pacific Garbage Patch is found in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.07348905503749847
+        },
+        {
+            "question": "What is the name of the longest mountain range in the Pacific Ocean?",
+            "expected_answer": "The Mid-Pacific Mountains are part of the longest mountain range in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.06249149888753891
+        },
+        {
+            "question": "What famous explorer crossed the Pacific Ocean in 1521?",
+            "expected_answer": "Ferdinand Magellan crossed the Pacific Ocean in 1521.",
+            "retrieved_answer": "",
+            "f1_score": 0.023737480863928795
+        },
+        {
+            "question": "What oceanic region is known for its frequent typhoons?",
+            "expected_answer": "The western Pacific Ocean is known for its frequent typhoons.",
+            "retrieved_answer": "",
+            "f1_score": -0.05616524815559387
+        },
+        {
+            "question": "What large reef system is located in the Pacific Ocean?",
+            "expected_answer": "The Great Barrier Reef is located in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.09982083737850189
+        },
+        {
+            "question": "Which country has the most islands in the Pacific Ocean?",
+            "expected_answer": "Indonesia has the most islands in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.002943185158073902
+        },
+        {
+            "question": "Which famous battle of World War II took place in the Pacific Ocean?",
+            "expected_answer": "The Battle of Midway took place in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.02348416857421398
+        },
+        {
+            "question": "What is the primary cause of the Pacific Ocean\u2019s high biodiversity?",
+            "expected_answer": "The Pacific Ocean's warm waters and diverse ecosystems contribute to its high biodiversity.",
+            "retrieved_answer": "",
+            "f1_score": -0.04555225372314453
+        },
+        {
+            "question": "Which oceanic feature forms due to volcanic activity in the Pacific Ocean?",
+            "expected_answer": "Islands and atolls form due to volcanic activity in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.043743595480918884
+        },
+        {
+            "question": "What major oceanic trade route crosses the Pacific Ocean?",
+            "expected_answer": "The Trans-Pacific shipping route crosses the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": 0.026102431118488312
+        },
+        {
+            "question": "What is the main cause of the Pacific Ocean\u2019s waves?",
+            "expected_answer": "Wind is the main cause of waves in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.009959913790225983
+        },
+        {
+            "question": "Which marine mammal is commonly found in the Pacific Ocean?",
+            "expected_answer": "The humpback whale is commonly found in the Pacific Ocean.",
+            "retrieved_answer": "",
+            "f1_score": -0.04979605972766876
+        },
+        {
+            "question": "What oceanic region is home to many active volcanoes?",
+            "expected_answer": "The Pacific Ring of Fire is home to many active volcanoes.",
+            "retrieved_answer": "",
+            "f1_score": -0.03462109714746475
+        }
+    ]
+}
