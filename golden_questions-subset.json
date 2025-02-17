@@ -1,0 +1,850 @@
+[
+    {
+        "question": "Will Synapse workspace support folder organization of objects and granularity at GA?",
+        "expected_answer": "Synapse workspaces supports user-defined folders."
+    },
+    {
+        "question": "Can I link more than one Power BI workspace to a single Azure Synapse Workspace?",
+        "expected_answer": "Yes, as of June 10, 2021, Synapse Studio now allows you to add more than one Power BI workspace to a single Azure Synapse Workspace."
+    },
+    {
+        "question": "Is Azure Synapse Link to Azure Cosmos DB generally available?",
+        "expected_answer": "Azure Synapse Analytics currently supports Azure Synapse Link from Azure Cosmos DB to Synapse Apache Spark and serverless SQL pool. Azure Synapse Link for Apache Spark is GA. Synapse Link for serverless SQL pool is in preview. For more information, seeAzure Synapse Link for Azure Cosmos DB."
+    },
+    {
+        "question": "Is Azure Synapse Link for SQL generally available?",
+        "expected_answer": "Azure Synapse Link for SQL is generally available for both SQL Server 2022 and Azure SQL Database. For more information, seeWhat is Azure Synapse Link for SQL?."
+    },
+    {
+        "question": "Does Azure Synapse workspace Support CI/CD?",
+        "expected_answer": "Yes! All Pipeline artifacts, notebooks, SQL scripts, and Spark job definitions will reside in Git. All pool definitions will be stored in Git as Azure Resource Manager (ARM) templates. Dedicated SQL pool objects (schemas, tables, views, etcetera.) will be managed with database projects with CI/CD support. For more information, check out thisCI and CD Guide."
+    },
+    {
+        "question": "What are the functional differences between dedicated SQL pools and serverless pools?",
+        "expected_answer": "You can find a full list of differences inT-SQL feature differences in Synapse SQL."
+    },
+    {
+        "question": "What are Delta tables, and why should I use them?",
+        "expected_answer": "Lakehouse is based on open direct-access data formats, such as Apache Parquet. It has first-class support for machine learning and data science. A Delta table is a view of data that is contained in a Delta Lake, which supports most options provided by Apache Spark DataFrame read and write APIs. Lakehouses can help with major challenges with data warehouses, like data staleness, reliability, total cost of ownership, and data lock-in. On Delta tables, optimizations like auto compaction and adaptive query plans are available. For a detailed guide to Delta Lake, please visitDelta Lake Guide."
+    },
+    {
+        "question": "What is Auto Compaction?",
+        "expected_answer": "Auto Compaction is one of two complementary features of Auto Optimize for Delta tables. After a write to a table succeeds, Auto Compaction can further compact files for partitions that have the most number of small files. Opting in to Auto Compaction is recommended for streaming use cases where adding minutes of latency is acceptable and when you don't have regular OPTIMIZE calls on your table. For more information on Auto Optimize and Auto Compaction, check out thisAuto Optimize Guide."
+    },
+    {
+        "question": "How do I ensure I know what credential is being used to run a pipeline?",
+        "expected_answer": "Each activity in a Synapse Pipeline is executed using the credential specified inside the linked service."
+    },
+    {
+        "question": "Are SSIS IRs supported in Synapse Integrate?",
+        "expected_answer": "Not at this time."
+    },
+    {
+        "question": "How are Azure Data Factory pipelines and Azure Synapse pipelines different?",
+        "expected_answer": "Some examples of differences are support for global parameters, monitoring of Spark Jobs for Data Flow, and Integration Runtime sharing. For more information, check out this doc forData Integration - Synapse vs ADF."
+    },
+    {
+        "question": "How do I migrate existing pipelines from Azure Data Factory to an Azure Synapse workspace?",
+        "expected_answer": "At this time, you must manually recreate your Azure Data Factory pipelines and related artifacts by exporting the JSON from the original pipeline and importing it into your Synapse workspace."
+    },
+    {
+        "question": "How do I use an Apache Spark Job Definition?",
+        "expected_answer": "Check out thisQuick Start Guide."
+    },
+    {
+        "question": "Can I call notebooks from ADF pipelines?",
+        "expected_answer": "There are two options for this use case. One option is to keep pipelines in ADF, and you will have to wrap in a web activity. For more information on this option, please view thisWeb Activity Guide. The other option is to migrate the pipelines to Synapse. For more information on the second option, check out thisMigration Code Sample."
+    },
+    {
+        "question": "What is the difference between Apache Spark for Synapse and Apache Spark?",
+        "expected_answer": "Apache Spark for Synapse is Apache Spark with added support for integrations with other services (Microsoft Entra ID, AzureML, etc.) and additional libraries (mssparkutils, Hummingbird) and pre-tuned performance configurations. Any workload that is currently running on Apache Spark will run on Apache Spark for Azure Synapse without change."
+    },
+    {
+        "question": "What versions of Spark are available?",
+        "expected_answer": "As of September 2023, Azure Synapse Apache Spark fully supports Spark 3.3. For a full list of core components and currently supported versions seeApache Spark version support."
+    },
+    {
+        "question": "Is there an equivalent of DButils in Azure Synapse Spark?",
+        "expected_answer": "Yes, Azure Synapse Apache Spark provides themssparkutilslibrary. For full documentation of the utility seeIntroduction to Microsoft Spark utilities."
+    },
+    {
+        "question": "How do I set session parameters in Apache Spark?",
+        "expected_answer": "To set session parameters, use %%configure magic available. A session restart is required for the parameters to take effect."
+    },
+    {
+        "question": "How do I set cluster level parameters in a serverless Spark pool?",
+        "expected_answer": "To set cluster level parameters, you can provide a spark.conf file for the Spark pool. This pool will then honor the parameters past in the config file."
+    },
+    {
+        "question": "Can I run a multi-user Spark Cluster in Azure Synapse Analytics?",
+        "expected_answer": "Azure Synapse provides purpose-built engines for specific use cases. Apache Spark for Synapse is designed as a job service and not a cluster model.\nThere are two scenarios where people ask for a multi-user cluster model. Scenario #1: Many users accessing a cluster for serving data for BI purposes. The easiest way of accomplishing this task is to cook the data with Spark and then take advantage of the serving capabilities of Synapse SQL to that they can connect Power BI to those datasets. Scenario #2: Having multiple developers on a single cluster to save money. To satisfy this scenario, you should give each developer a serverless Spark pool that is set to use a small number of Spark resources. Since serverless Spark pools don't cost anything, until they are actively used minimizes the cost when there are multiple developers. The pools share metadata (Spark tables) so they can easily work with each other."
+    },
+    {
+        "question": "How do I include, manage, and install libraries?",
+        "expected_answer": "You can install external packages via a requirements.txt file while creating the Spark pool, from the synapse workspace, or from the Azure portal. SeeManage libraries for Apache Spark in Azure Synapse Analytics."
+    },
+    {
+        "question": "What tools are available to me on Synapse Spark?",
+        "expected_answer": "MSSparkUtils on Synapse Spark offers a variety of utilities to enhance your experience and to make integration with other tools and services easier. Work with file systems, get environment variables, chain notebooks together, and work with secrets with minimal manual steps. For full documentation, please visitMicrosoft Spark Utilities."
+    },
+    {
+        "question": "What is the difference between dedicated SQL pools (SQL DW) and dedicated SQL pools in Azure Synapse workspaces?",
+        "expected_answer": "Dedicated SQL pools (formerly SQL DW) are an Azure Platform-as-a-Service (PaaS) enterprise data warehousing platform. You can query existing dedicated SQL pools (formerly SQL DW) and also create new dedicated SQL pools in your Azure Synapse workspace. Not all features of the dedicated SQL pool in Azure Synapse workspaces apply to a standalone dedicated SQL pool (formerly SQL DW), and vice versa. For more information, seeWhat's the difference between Azure Synapse dedicated SQL pools (formerly SQL DW) and dedicated SQL pools in an Azure Synapse Analytics workspace?. To enable Azure Synapse workspace features for an existing dedicated SQL pool (formerly SQL DW), refer toHow to enable a workspace for your dedicated SQL pool (formerly SQL DW)."
+    },
+    {
+        "question": "Now that Azure Synapse is GA, how do I move my dedicated SQL pools that were previously standalone into Azure Synapse?",
+        "expected_answer": "There is no \u00e2\u20ac\u0153move\u00e2\u20ac\u009d or \u00e2\u20ac\u0153migration\u00e2\u20ac\u009d necessary. You can choose to enable new workspace features on your existing pools. If you do, there are no breaking changes, instead you'll be able to use new features such as Synapse Studio, Spark, and serverless SQL pools. Not all features of the dedicated SQL pool in Azure Synapse workspaces apply to dedicated SQL pool (formerly SQL DW), and vice versa. To enable workspace features for an existing dedicated SQL pool (formerly SQL DW) refer toHow to enable a workspace for your dedicated SQL pool (formerly SQL DW)."
+    },
+    {
+        "question": "What is the default deployment of dedicated SQL pools now?",
+        "expected_answer": "By Default, all new dedicated SQL pools will be deployed to a workspace; however, if you need to you can still create a dedicated SQL pool (formerly SQL DW) in a standalone form factor."
+    },
+    {
+        "question": "How do I secure access to my Azure Synapse workspace?",
+        "expected_answer": "With or without amanaged virtual network, you can connect to your workspace from public networks. For more information, seeConnectivity Settings. Access from public networks can be controlled by enabling thepublic network access featureor theworkspace firewall. Alternatively, you can connect to your workspace using amanaged private endpointandPrivate Link. Synapse workspaces without theAzure Synapse Analytics Managed Virtual Networkdo not have the ability to connect via managed private endpoints."
+    },
+    {
+        "question": "What is the policy for Azure SDKs?",
+        "expected_answer": "Microsoft will provide notification 12 months before retiring an SDK to smooth the transition to a supported version. For more details, refer to the  SDK support guidelines ."
+    },
+    {
+        "question": "What is the policy for Azure Cloud Services (classic and extended support)?",
+        "expected_answer": "Guest OS \n Microsoft Azure Cloud Services will support no fewer than the latest two Guest OS Families for deploying new Cloud Services. Microsoft will provide notification 12 months before retiring a Guest OS family to smooth the transition to a supported Guest OS family. For more information about supported Guest OS families, please refer to\u00c2\u00a0 Microsoft Azure Guest OS Releases and SDK Compatibility Matrix . \n Azure SDK \n The Microsoft Azure SDK policy covers Microsoft Azure SDK authoring tools, REST APIs, client libraries, command-line utilities, compute & storage emulators, and Azure Tools for Microsoft Visual Studio. \n Microsoft Azure Cloud Services will support no fewer than the latest two SDK versions for deploying new Cloud Services. Microsoft will provide notification 12 months before retiring an SDK to smooth the transition to a supported version."
+    },
+    {
+        "question": "What is a Distributed Denial of Service (DDoS) attack?",
+        "expected_answer": "Distributed denial of service, or DDoS, is a type of attack where an attacker sends more requests to an application than the application is capable of handling. The resulting effect is resources being depleted, affecting the application\u00e2\u0080\u0099s availability and ability to service its customers. Over the past few years, the industry has seen a sharp increase in attacks, with attacks becoming more sophisticated and larger in magnitude. DDoS attacks can be targeted at any endpoint that is publicly reachable through the Internet."
+    },
+    {
+        "question": "What is Azure DDoS Protection service?",
+        "expected_answer": "Azure DDoS Protection, combined with application design best practices, provides enhanced DDoS mitigation features to defend against DDoS attacks. It's automatically tuned to help protect your specific Azure resources in a virtual network. Protection is simple to enable on any new or existing virtual network, and it requires no application or resource changes. For more information, see  Azure DDoS Protection overview .\u00c2\u00a0"
+    },
+    {
+        "question": "How does pricing work?",
+        "expected_answer": "DDoS protection plans have a fixed monthly charge that covers up to 100 public IP addresses. Protection for additional resources is available. \n Under a tenant, a single DDoS protection plan can be used across multiple subscriptions, so there's no need to create more than one DDoS protection plan. \n When Application Gateway with WAF is deployed in a DDoS protected VNet, there are no extra charges for WAF - you pay for the Application Gateway at the  lower non-WAF rate . This policy applies to both Application Gateway v1 and v2 SKUs. \n See  Azure DDoS Protection pricing  for pricing and more details."
+    },
+    {
+        "question": "Which Azure DDoS Protection tier should I choose?",
+        "expected_answer": "If you need to protect less than 15 public IP resources, the IP Protection tier is the more cost-effective option. If you have more than 15 public IP resources to protect, then the Network Protection tier is more cost-effective. Network Protection also offers additional features, including DDoS Protection Rapid Response (DRR), cost protection guarantees, and Web Application Firewall (WAF) discounts."
+    },
+    {
+        "question": "Is the service zone resilient?",
+        "expected_answer": "Yes. Azure DDoS Protection is zone-resilient by default."
+    },
+    {
+        "question": "How do I configure the service to be zone-resilient?",
+        "expected_answer": "No customer configuration is necessary to enable zone-resiliency. Zone-resiliency for Azure DDoS Protection resources is available by default and managed by the service itself."
+    },
+    {
+        "question": "What about protection at the service layer (layer 7)?",
+        "expected_answer": "Customers can use Azure DDoS Protection service in combination with a Web Application Firewall (WAF) to for protection both at the network layer (Layer 3 and 4, offered by Azure DDoS Protection) and at the application layer (Layer 7, offered by a WAF). WAF offerings include Azure  Application Gateway WAF SKU  and third-party web application firewall offerings available in the  Azure Marketplace ."
+    },
+    {
+        "question": "Are services unsafe in Azure without the service?",
+        "expected_answer": "Services running on Azure are inherently protected by the default infrastructure-level DDoS protection. However, the protection that safeguards the infrastructure has a much higher threshold than most applications have the capacity to handle, and does not provide telemetry or alerting, so while a traffic volume may be perceived as harmless by the platform, it can be devastating to the application that receives it. \n By onboarding to the Azure DDoS Protection Service, the application gets dedicated monitoring to detect attacks and application specific thresholds. A service will be protected with a profile that is tuned to its expected traffic volume, providing a much tighter defense against DDoS attacks."
+    },
+    {
+        "question": "What are the supported protected resource types?",
+        "expected_answer": "Public IPs in ARM based VNETs are currently the only type of protected resource. Protected resources include public IPs attached to an IaaS VM, Load Balancer (Classic & Standard Load Balancers), Application Gateway (including WAF) cluster, Firewall, Bastion, VPN Gateway, Service Fabric or an IaaS based Network Virtual Appliance (NVA). Protection also covers public IP ranges brought to Azure via Custom IP Prefixes (BYOIPs). \n To learn about limitations, see  Azure DDoS Protection reference architectures ."
+    },
+    {
+        "question": "Are Classic/RDFE protected resources supported?",
+        "expected_answer": "Only ARM based protected resources are supported in preview. VMs in Classic/RDFE deployments are not supported. Support is not currently planned for Classic/RDFE resources.\u00c2\u00a0For more information, see  Azure DDoS Protection reference architectures ."
+    },
+    {
+        "question": "Can I protect my PaaS resources using DDoS Protection?",
+        "expected_answer": "Public IPs attached to multi-tenant, single VIP PaaS services are not supported presently. Examples of unsupported resources include Storage VIPs, Event Hubs VIPs and App/Cloud Services applications.\u00c2\u00a0For more information, see  Azure DDoS Protection reference architectures ."
+    },
+    {
+        "question": "Can I protect my on-premises resources using DDoS Protection?",
+        "expected_answer": "You need to have the public endpoints of your service associated to a VNet in Azure to be enabled for DDoS protection. Example designs include: \n \n Web sites (IaaS) in Azure and backend databases in on-premises datacenter. \n Application Gateway in Azure (DDoS protection enabled on App Gateway/WAF) and websites in on-premises datacenters. \n \n For more information, see  Azure DDoS Protection reference architectures ."
+    },
+    {
+        "question": "Can I register a domain outside of Azure and associate that to a protected resource like VM or ELB?",
+        "expected_answer": "For the Public IP scenarios, DDoS Protection service will support any application regardless of where the associated domain is registered or hosted as long as the associated Public IP is hosted on Azure."
+    },
+    {
+        "question": "Can I manually configure the DDoS policy applied to the VNets/Public IPs?",
+        "expected_answer": "No, unfortunately policy customization is not available at this moment."
+    },
+    {
+        "question": "Can I allowlist/blocklist specific IP addresses?",
+        "expected_answer": "No, unfortunately manual configuration is not available at this moment."
+    },
+    {
+        "question": "How can I test DDoS Protection?",
+        "expected_answer": "See  testing through simulations ."
+    },
+    {
+        "question": "How long does it take for the metrics to load on portal?",
+        "expected_answer": "The metrics should be visible on portal within 5 minutes. If your resource is under attack, other metrics will start showing up on portal within 5-7 minutes."
+    },
+    {
+        "question": "Does the service store customer data?",
+        "expected_answer": "No, Azure DDoS protection does not store customer data."
+    },
+    {
+        "question": "Is a single VM deployment behind public IP supported?",
+        "expected_answer": "Scenarios in which a single VM is running behind a public IP is supported but not recommended. DDoS mitigation might not initiate instantaneously when DDoS attack is detected. As a result, a single VM deployment that can\u00e2\u0080\u0099t scale out will go down in such cases. For more information, see  Fundamental best practices ."
+    },
+    {
+        "question": "Device isn't being added to the device group specified in the Windows Autopilot device preparation policy.",
+        "expected_answer": "\n Verify that  Intune Provisioning Client  is set as the owner for the device group specified in the Windows Autopilot device preparation policy. For more information,  Create a device group . \n \n Verify that the correct device group is specified in the Windows Autopilot device preparation policy. For more information, see  Create a Windows Autopilot device preparation policy  and  Create a device group . \n \n Verify that  Microsoft Entra roles can be assigned to the group  setting in the device group is set to  No . For more information, see  Create a device group . \n \n Verify that the admin creating the Autopilot device preparation policy has the  Enrollment time device membership assignment  RBAC permission. For more information, see  Required RBAC permissions . \n \n"
+    },
+    {
+        "question": "Windows Autopilot device preparation experience never launches during the out-of-box experience (OOBE).",
+        "expected_answer": "\n Verify that the minimum version of Windows is being used as documented in  Software requirements . This requirement includes that the minimum required update is installed before starting the device for the first time: \n \n Verify with OEMs that devices shipped from the OEM have the minimum required update installed. \n \n If installing Windows from installation media, verify that the media has the minimum required update installed. Updated Windows installation media with the latest cumulative update already installed is available at the  Volume Licensing Service Center (VLSC) . \n \n \n \n Windows Autopilot device preparation doesn't use the Enrollment Status Page (ESP). Since Windows Autopilot device preparation doesn't use the ESP, the ESP shouldn't display during a Windows Autopilot device preparation deployment. If the ESP displays during the deployment, then the device isn't running a Windows Autopilot device preparation deployment. Instead, the device might be: \n \n A Windows Autopilot registered device. \n A Windows Autopilot profile is assigned to the device. \n \n Verify that the device isn't registered as a Windows Autopilot device and that a Windows Autopilot profile isn't assigned to the device. Windows Autopilot profiles take precedence over Windows Autopilot device preparation policies. \n If a device needs to be removed as a Windows Autopilot device, see  Deregister a device . \n \n Verify that the user signing into the device during OOBE is a member of the user group specified in the Windows Autopilot device preparation policy. For more information, see  Create a Windows Autopilot device preparation policy  and  Create a user group . \n \n Verify that a device group is selected in the Windows Autopilot device preparation policy. A Windows Autopilot device preparation policy can be created without selecting a device group. For more information, see  Create a Windows Autopilot device preparation policy  and  Create a device group . \n \n If using corporate identifiers in Intune, make sure that a corporate identifier is added for the device. For more information, see  Add Windows corporate identifiers . \n \n Verify that Windows automatic Intune enrollment is configured. \n \n Verify that users are allowed to join device to Microsoft Entra ID. \n \n"
+    },
+    {
+        "question": "Applications or PowerShell scripts aren't getting installed.",
+        "expected_answer": "\n If the applications or PowerShell scripts are showing  Skipped  in the details of the Windows Autopilot device preparation deployment report, verify that they're assigned to the device group specified in the Windows Autopilot device preparation policy. For more information, see  Windows Autopilot device preparation policy configuration settings  and  Create a device group . \n \n Verify that the application or PowerShell script is configured to install in the  System  context. During OOBE, applications are installed and PowerShell scripts run when no user is signed in. For this reason, they must be configured to install in the  System  context. \n \n"
+    },
+    {
+        "question": "Device security group isn't saving in Windows Autopilot device preparation policy.",
+        "expected_answer": "This issue usually occurs if  Intune Provisioning Client  with AppID of  f1346770-5b25-470b-88bd-d5744ab7952c  isn't the owner of the device group specified in the Windows Autopilot device preparation policy. When the issue occurs, one of the following error messages might display when saving the Windows Autopilot device preparation policy: \n \n There was a problem with the device security group for <policy_name>. Check the group meets the requirements. \n \n Failed to update security group device preparation setting: Updating security group for device preparation setting <policy_name> failed. Something went wrong. \n \n \n Additionally,  Device group  in the Windows Autopilot device preparation policy shows  0 groups assigned . \n To fix the issue, add the  Intune Provisioning Client  service principal with AppID of  f1346770-5b25-470b-88bd-d5744ab7952c  as the owner of the device security group specified in the Windows Autopilot device preparation policy. For more information, see  Create a device group ."
+    },
+    {
+        "question": "Unable to find Intune Provisioning Client with AppID of f1346770-5b25-470b-88bd-d5744ab7952c when trying to set the owner of the Windows Autopilot device preparation policy device group.",
+        "expected_answer": "\n In some tenants, the service principal might have the name of  Intune Autopilot ConfidentialClient  instead of  Intune Provisioning Client . As long as the AppID of the service principal is  f1346770-5b25-470b-88bd-d5744ab7952c , it's the correct service principal. \n \n If either  Intune Provisioning Client  or  Intune Autopilot ConfidentialClient  with AppID of  f1346770-5b25-470b-88bd-d5744ab7952c  doesn't exist in the tenant, it must be added via PowerShell commands. For more information, see  Adding the Intune Provisioning Client service principal . \n \n"
+    },
+    {
+        "question": "Multiple Windows Autopilot device preparation policies exist and the device is getting the wrong policy.",
+        "expected_answer": "If multiple Windows Autopilot device preparation policies are deployed to a user, the policy with the highest priority gets priority. Policy priorities are displayed at the  Home  >  Enroll devices | Windows enrollment  >  Device preparation policies  screen. The policy with the highest priority is higher in the list and has the smallest number under the  Priority  column. To change a policy's priority, move it in the list by dragging the policy within the list."
+    },
+    {
+        "question": "What is the Services Hub dashboard?",
+        "expected_answer": "Your Services Hub dashboard allows you\nto stay on top of issues so they can\nbe resolved quickly."
+    },
+    {
+        "question": "What does the Services Hub dashboard display?",
+        "expected_answer": "In your Services Hub dashboard, you can\nfind summary information about your\nMicrosoft Services and support\ninformation with tailored\nrecommendations."
+    },
+    {
+        "question": "How do I sign out of the Services Hub?",
+        "expected_answer": "Select your name in the top right\ncorner of Microsoft Services Hub,\nthen select \"Sign Out\"."
+    },
+    {
+        "question": "Can I customize my dashboard?",
+        "expected_answer": "At this time, the dashboard isn't\ncustomizable."
+    },
+    {
+        "question": "Why does the dashboard use multiple different fonts?",
+        "expected_answer": "The variety of layout styles help\norganize and draw attention to\nseparate pieces of information."
+    },
+    {
+        "question": "Is there a preferred browser to use for viewing the Services Hub dashboard?",
+        "expected_answer": "You can view the Services Hub in most\ncommonly-used web browsers."
+    },
+    {
+        "question": "Can I access the Services Hub dashboard from a mobile device?",
+        "expected_answer": "Yes, you can view the Services Hub\nin a mobile web browser app."
+    },
+    {
+        "question": "How do I set the language in Services Hub?",
+        "expected_answer": "To set your language, use the Services\nHub footer next to the globe icon."
+    },
+    {
+        "question": "Where does the dashboard data come from?",
+        "expected_answer": "The data in your dashboard comes from\nvarious sources including your\nagreement, services, and support\ninformation."
+    },
+    {
+        "question": "Can I drill into data in my dashboard to see details?",
+        "expected_answer": "You can drill into the dashboard tiles\nto view additional information where\navailable."
+    },
+    {
+        "question": "The data in my Services Hub dashboard is incorrect. How do I get help?",
+        "expected_answer": "If you don't see data that's accurate,\nopen a support request."
+    },
+    {
+        "question": "Where does the Proactive Services chart come from?",
+        "expected_answer": "The Proactive Services chart displaysa breakdown of all engagements listed\ninside your Services Delivery Plan\n(SDP). SDPs can span multiple\nagreement years."
+    },
+    {
+        "question": "What does \"Other\" mean in the Proactive Services chart?",
+        "expected_answer": "Microsoft Services uses a classic\ndeployment model framework to classify\nengagements into three categories\n(Maintain-Optimize-Educate). When a\nservice is delivered as a custom\nengagement, it's listed outside of\nthat framework as \"Other\"."
+    },
+    {
+        "question": "Why do I have no Upcoming Services shown in Available Services?",
+        "expected_answer": "Upcoming Services lists services\nscheduled by your Customer Success\nAccount Manager (CSAM). If this field\nis empty, it means you have no\nscheduled services upcoming at\nthis time."
+    },
+    {
+        "question": "Can I modify an application proxy app from the **App registrations** page in the Microsoft Entra admin center?",
+        "expected_answer": "No, the following configuration items are being used by app proxy and shouldn't be altered or deleted:"
+    },
+    {
+        "question": "Can I delete an application proxy app from the App registrations page in the Microsoft Entra admin center?",
+        "expected_answer": "No, you should delete an application proxy app from theEnterprise applicationsarea of the Microsoft Entra admin center. If you delete the application proxy app from theApp registrationsarea of the Microsoft Entra admin center, then you could experience issues."
+    },
+    {
+        "question": "What license is required to use Microsoft Entra application proxy?",
+        "expected_answer": "To use Microsoft Entra application proxy, you must have a Microsoft Entra ID P1 or P2 license. For more information about licensing, seeMicrosoft Entra pricing"
+    },
+    {
+        "question": "What happens to Microsoft Entra application proxy in my tenant, if my license expires?",
+        "expected_answer": "If your license expires, application proxy is automatically disabled. Your application information is saved for up to one year."
+    },
+    {
+        "question": "Why is the Enable application proxy button grayed out?",
+        "expected_answer": "Make sure you have at least a Microsoft Entra ID P1 or P2 license and a Microsoft Entra private network connector installed. After you successfully install your first connector, the Microsoft Entra application proxy service is enabled automatically."
+    },
+    {
+        "question": "What are TCP ports 10200 and 10201 used for?",
+        "expected_answer": "Using a port scan utility on application proxy public endpoints (msappproxy.net or custom) may show that TCP ports 10200 and 10201 are open, in addition to ports 80 and/or 443. These ports are used for internal service health monitoring purposes. No customer data is accessible over these ports, and the services behind them do not process any information; they simply respond with \"OK\"."
+    },
+    {
+        "question": "Does application proxy use the same connector as Microsoft Entra Private Access?",
+        "expected_answer": "Yes, Microsoft Entra private network connector is used by both application proxy and Microsoft Entra Private Access. To learn more about the connector, seeMicrosoft Entra private network connector.\nTo troubleshoot connector configuration, seetroubleshoot connectors."
+    },
+    {
+        "question": "ConnectorTroubleshooter cannot start",
+        "expected_answer": "The ConnectorTroubleshooterLauncher.exe is deprecated and no longer functional. Currently, there is no replacement available."
+    },
+    {
+        "question": "Can I Change the Logon User of the Microsoft Entra Private Network Connector / Updater Services?",
+        "expected_answer": "Changing the logon user of the connector or updater service is not supported. Correct Configuration: Microsoft Entra Private Network Connector:Network ServiceMicrosoft Entra Private Network Connector Updater:NT Authority\\System"
+    },
+    {
+        "question": "Can I use the domain suffixes `[tenant name].onmicrosoft.com` or `[tenant name].mail.onmicrosoft.com` in the external URL?",
+        "expected_answer": "Although these suffixes appear in the suffix list, you shouldn't use them. These domain suffixes aren't meant to be used with Microsoft Entra application proxy. If you use these domain suffixes, the created Microsoft Entra application proxy application won't work.\nYou can use either the standard domain suffixmsappproxy.netor acustom domain."
+    },
+    {
+        "question": "Does application proxy support for sovereign and regional clouds?",
+        "expected_answer": "Microsoft Entra ID has an application proxy service that enables users to access on-premises applications by signing in with their Microsoft Entra account.\nIf you have installed connectors in different regions, you can optimize traffic by selecting the closest application proxy cloud service region to use with each connector group, seeOptimize traffic flow with Microsoft Entra application proxy."
+    },
+    {
+        "question": "I'm receiving an error about an invalid certificate or possible wrong password.",
+        "expected_answer": "After you uploaded the SSL certificate, you receive the message \"Invalid certificate, possible wrong password\" on the portal. Here are some tips for troubleshooting this error:"
+    },
+    {
+        "question": "What is the length of the default and \"long\" backend timeout? Can the timeout be extended?",
+        "expected_answer": "The default length is 85 seconds. The \"long\" setting is 180 seconds. The timeout limit can't be extended."
+    },
+    {
+        "question": "Can a service principal manage application proxy using PowerShell or Microsoft Graph APIs?",
+        "expected_answer": "No, this is currently not supported."
+    },
+    {
+        "question": "What happens if I delete CWAP_AuthSecret (the client secret) in the app registration?",
+        "expected_answer": "The client secret, also calledCWAP_AuthSecret, is automatically added to the application object (app registration) when the Microsoft Entra application proxy app is created. The client secret is valid for one year. A new one-year client secret is automatically created before the current valid client secret expires. Three CWAP_AuthSecret client secrets are kept in the application object always. Important Deleting CWAP_AuthSecret breaks preauthentication for Microsoft Entra application proxy. Don't delete CWAP_AuthSecret."
+    },
+    {
+        "question": "I'm using or want to use Microsoft Entra application proxy. Can I replace the \"onmicrosoft.com\" fallback domain of my tenant in Microsoft 365 as suggested in the article \"Add and replace your onmicrosoft.com fallback domain in Microsoft 365\"?",
+        "expected_answer": "No, you must use the original fallback domain. Article mentioned in question:Add and replace your onmicrosoft.com fallback domain in Microsoft 365"
+    },
+    {
+        "question": "How do I change the landing page my application loads?",
+        "expected_answer": "From the Application Registrations page, you can change the homepage URL to the desired external URL of the landing page. The specified page is loaded when the application is launched from My Apps or the Office 365 Portal. For configuration steps, seeSet a custom home page for published apps by using Microsoft Entra application proxy"
+    },
+    {
+        "question": "Why do I get redirected to a truncated URL when I try to access my published application whenever the  URL contains a \"#\"  (hashtag) character?",
+        "expected_answer": "If Microsoft Entra preauthentication is configured, and the application URL contains a \u00e2\u20ac\u0153#\u00e2\u20ac\u009d character when you try to access the application for the first time, you get redirected to Microsoft Entra ID (login.microsoftonline.com) for the authentication. Once you complete the authentication, you get redirected to the URL part prior to the \u00e2\u20ac\u009d#\u00e2\u20ac\u009d character and everything that comes after the \u00e2\u20ac\u0153#\u00e2\u20ac\u0153 seems to be ignored/ removed. For example if the URL ishttps://www.contoso.com/#/home/index.html, once the Microsoft Entra authentication is done the user is redirected tohttps://www.contoso.com/.\nThis behavior is by design due to how the \u00e2\u20ac\u0153#\u00e2\u20ac\u009d character is handled by the browser. Possible solutions/  alternatives:"
+    },
+    {
+        "question": "Can only IIS-based applications be published? What about web applications running on non-Windows web servers? Does the connector have to be installed on a server with IIS installed?",
+        "expected_answer": "No, there's no IIS requirement for applications that are published. You can publish web applications running on servers other than Windows Server. However, you might not be able to use preauthentication with a non-Windows Server, depending on if the web server supports Negotiate (Kerberos authentication). IIS isn't required on the server where the connector is installed."
+    },
+    {
+        "question": "Can I configure application proxy to add the HSTS header?",
+        "expected_answer": "Application proxy doesn't automatically add the HTTP Strict-Transport-Security header to HTTPS responses, but it maintains the header if it is in the original response sent by the published application. Proving a setting to enable this functionality is on the roadmap."
+    },
+    {
+        "question": "Can I use a custom port number in the external URL?",
+        "expected_answer": "No, if the protocolhttpis configured in the external URL then the Microsoft Entra application proxy endpoint accepts incoming request on the port TCP 80, if the protocolhttpsthen on the port TCP 443."
+    },
+    {
+        "question": "Can I use a custom port number in the internal URL?",
+        "expected_answer": "Yes, some examples for internal URLs including ports:http://app.contoso.local:8888/,https://app.contoso.local:8080/,https://app.contoso.local:8081/test/."
+    },
+    {
+        "question": "What are the challenges, if the external and the internal URLs are different?",
+        "expected_answer": "Some responses sent by the published web applications might contain hard-coded URLs.\nIn this case it must be ensured by using a link translation solution that the client always uses the correct URL.\nLink translation solutions might be complex and might not work in all the scenarios. You can findhereour documented solutions for link translation. As best practice it's advised to use identical external and internal URLs. External and internal URLs are considered to be identical, if theprotocol://hostname:port/path/in both URLs are identical. This can be achieved by using theCustom Domainsfeature. Examples: Identical: Not identical: Making the external and internal URLs identical isn't possible at all, if the internal URL contains a nonstandard port (other than TCP 80 / 443). In some scenarios changes must be done in the configuration of the web app."
+    },
+    {
+        "question": "When should I use the PrincipalsAllowedToDelegateToAccount method when setting up Kerberos Constrained Delegation (KCD)?",
+        "expected_answer": "The PrincipalsAllowedToDelegateToAccount method is used when connector servers are in a different domain from the web application service account. It requires the use of Resource-based Constrained Delegation.\nIf the connector servers and the web application service account are in the same domain, you can use Active Directory Users and Computers to configure the delegation settings on each of the connector machine accounts, allowing them to delegate to the target SPN. If the connector servers and the web application service account are in different domains, Resource-based delegation is used. The delegation permissions are configured on the target web server and web application service account. This method of Constrained Delegation is relatively new. The method was introduced in Windows Server 2012, which supports cross-domain delegation by allowing the resource (web service) owner to control which machine and service accounts can delegate to it. There's no UI to assist with this configuration, so you need to use PowerShell.\nFor more information, see the whitepaperUnderstanding Kerberos Constrained Delegation with application proxy."
+    },
+    {
+        "question": "Does NTLM authentication work with Microsoft Entra application proxy?",
+        "expected_answer": "NTLM authentication can\u00e2\u20ac\u2122t be used as a preauthentication or single sign-on method. NTLM authentication can be used only when it can be negotiated directly between the client and the published web application. Using NTLM authentication usually causes a sign-in prompt to appear in the browser."
+    },
+    {
+        "question": "Can I use the sign in identity \u00e2\u0080\u009cOn-premises user principal name\u00e2\u0080\u009d or \u00e2\u0080\u009cOn-premises SAM account name\u00e2\u0080\u009d in a B2B IWA single sign-on scenario?",
+        "expected_answer": "No, this won\u00e2\u0080\u0099t work, because a guest user in Microsoft Entra ID doesn't have the attribute that is required by any of the sign in identities mentioned above. \n In this case there's a fallback to \u00e2\u0080\u009cUser principal name\u00e2\u0080\u009d. For more details on the B2B scenario, please read  Grant B2B users in Microsoft Entra ID access to your on-premises applications ."
+    },
+    {
+        "question": "Can I use Conditional Access Policies for applications published with passthrough preauthentication?",
+        "expected_answer": "Conditional Access Policies are only enforced for successfully authenticated users in Microsoft Entra ID. Passthrough preauthentication doesn\u00e2\u20ac\u2122t trigger Microsoft Entra authentication, so Conditional Access Policies can't be enforced. With passthrough preauthentication, MFA policies must be implemented on the on-premises server, if possible, or by enabling Microsoft Entra ID preauthentication with Microsoft Entra application proxy."
+    },
+    {
+        "question": "Can I publish a web application with client certificate authentication requirement?",
+        "expected_answer": "No, this scenario isn't supported because application proxy terminates TLS traffic."
+    },
+    {
+        "question": "How can I publish Remote Desktop Gateway over Microsoft Entra application proxy?",
+        "expected_answer": "Refer toPublish Remote Desktop with Microsoft Entra application proxy."
+    },
+    {
+        "question": "Can I use Kerberos Constrained Delegation (single sign-on - Windows Integrated Authentication) in the Remote Desktop Gateway publishing scenario?",
+        "expected_answer": "No, this scenario isn't supported."
+    },
+    {
+        "question": "My users don't use Internet Explorer 11 and the preauthentication scenario doesn\u00e2\u0080\u0099t work for them. Is this expected?",
+        "expected_answer": "Yes, it\u00e2\u0080\u0099s expected. The preauthentication scenario requires an ActiveX control, which isn't supported in third-party browsers."
+    },
+    {
+        "question": "Is the Remote Desktop Web Client (HTML5) supported?",
+        "expected_answer": "Yes, this scenario is currently in public preview. Refer toPublish Remote Desktop with Microsoft Entra application proxy."
+    },
+    {
+        "question": "After I configured the preauthentication scenario, I realized that the user has to authenticate twice: first on the Microsoft Entra sign-in form, and then on the RDWeb sign-in form. Is this expected? How can I reduce this to one sign-in?",
+        "expected_answer": "Yes, it's expected. If the user\u00e2\u20ac\u2122s computer is Microsoft Entra joined, the user signs in to Microsoft Entra ID automatically. The user needs to provide their credentials only on the RDWeb sign-in form."
+    },
+    {
+        "question": "Can I use the Resources Launch Method option \"Download the rdp file\" under Settings on the Remote Desktop Web Client Portal in Microsoft Entra preauthentication scenario?",
+        "expected_answer": "This option enables the user to download the rdp file and use it by another RDP client (outside of the Remote Desktop Web Client). Typically, another RDP clients (like the Microsoft Remote Desktop Client) can't handle the preauthentication natively. That's why the scenario doesn't work."
+    },
+    {
+        "question": "How can I publish SharePoint over Microsoft Entra application proxy?",
+        "expected_answer": "Refer toEnable remote access to SharePoint with Microsoft Entra application proxy."
+    },
+    {
+        "question": "Can I use the SharePoint mobile app (iOS/ Android) to access a published SharePoint Server?",
+        "expected_answer": "TheSharePoint mobile appdoesn't support Microsoft Entra preauthentication currently."
+    },
+    {
+        "question": "Can I use Microsoft Entra application proxy as AD FS proxy (like Web application proxy)?",
+        "expected_answer": "No, Microsoft Entra application proxy is designed to work with Microsoft Entra ID and doesn\u00e2\u20ac\u2122t fulfill the requirements to act as an AD FS proxy."
+    },
+    {
+        "question": "Can I use Microsoft Entra application proxy to publish any AD FS endpoint (like /adfs/portal/updatepassword/)?",
+        "expected_answer": "No, this isn't supported."
+    },
+    {
+        "question": "Does Microsoft Entra application proxy support the WebSocket protocol?",
+        "expected_answer": "Applications that use the WebSocket protocol, for example QlikSense and Remote Desktop Web Client (HTML5), are now supported. The following are known limitations: The WebSocket application doesn't have any unique publishing requirements, and can bepublishedthe same way as all your other application proxy applications."
+    },
+    {
+        "question": "Does using Link translation affect performance?",
+        "expected_answer": "Yes. Link translation affects performance. The application proxy service scans the application for hardcoded links and replaces them with their respective, published external URLs before presenting them to the user. For best performance, we recommend using identical internal and external URLs by configuringcustom domains. If using custom domains isn't possible, you can improve link translation performance by using the My Apps Secure Sign in Extension or Microsoft Edge Browser on mobile. SeeRedirect hardcoded links for apps published with Microsoft Entra application proxy."
+    },
+    {
+        "question": "How do I use wildcards to publish two applications with the same custom domain name but with different protocols, one for HTTP and one for HTTPS?",
+        "expected_answer": "This scenario isn't supported directly. Your options for this scenario are: Publish both the HTTP and HTTPS URLs as separate applications with a wildcard, but give each of them a different custom domain. This configuration works since they have different external URLS. Publish the HTTPS URL through a wildcard application. Publish the HTTP applications separately using these application proxy PowerShell cmdlets:"
+    },
+    {
+        "question": "Can you delegate \"logging\" to remote administrators?",
+        "expected_answer": "No. It is in the site section and only machine administrators can modify this section. You can only delegate whether to log or not."
+    },
+    {
+        "question": "What kind of load does a custom logging module put on the server? (Disabling the kernel mode cache).",
+        "expected_answer": "It depends entirely on the application and the logging module implementation. If you are maxing CPU while serving static files, logging to SQL will be very heavy. If you're doing 50 requests/second, logging to SQL will most likely be able to keep up. You are losing the benefits of kernel-mode caching however."
+    },
+    {
+        "question": "Is there logging of delegated administration? Can we do an audit of delegated administrators?",
+        "expected_answer": "The only logging currently available is located in  %systemdrive%\\inetpub\\logs\\wmsvc  However, it does not give any useful information about what was actually done or even which object they connected to, since those are part of the headers. We are looking into changing some of the remoting behavior to use QueryString for certain things so that they can query the log. \n For example, moving the Module Service and the Method we are invoking as part of the query string would automatically place it in the log. That way you can figure out what is being done in their site. Also, the SiteName and the Application Path that you connected to should be there (connected to default web site), and potentially the current configuration path you are connecting to (now editing MyApp under my Default Web Site connection). One thing we should never include in the query string are arguments, since we do not want potentially sensitive information ending up in your log. This will also prevent the \"email link\" phishing attack."
+    },
+    {
+        "question": "Is there is an option to do auditing of the applicationhost.config file?",
+        "expected_answer": "Applicationhost.config is a file, the file system supports auditing. There is also a configuration history feature (not for auditing, but to help remember your last few configurations)."
+    },
+    {
+        "question": "Can the central W3CLogFile point to UNC share?",
+        "expected_answer": "Yes, it can point to a UNC share."
+    },
+    {
+        "question": "Can multiple front ends write to the same log file on a share?",
+        "expected_answer": "No, because there is no serialization service that would serialize file access between different writers. The utility Log Parser supports merging log files and potentially supports inserting them into SQL. \n \n Note \n Writing to separate logfiles can also help you determine what requests are going to a particular server in the farm. This can be helpful if you are seeing sporadic errors and need to track down what server they occurred on. \n"
+    },
+    {
+        "question": "Does the SQL Logging Provider support W3C standards? Can we get logging all centralized into SQL using the W3C extended format?",
+        "expected_answer": "ODBC logging is still in the product. It is trivial to write your own SQL logging on top of newer, faster database APIs, however. We would recommend writing an SQL logging module instead of going through the ancient ODBC interfaces."
+    },
+    {
+        "question": "What type of error reporting is implemented for Application Pools?",
+        "expected_answer": "Event logs, FREB, ETW tracing, Detailed Errors"
+    },
+    {
+        "question": "We have been monitoring the Resources and Support feature that uses on average 10% disk load and used around 38 GB of Data from install. Diskeeper 11 Reported over seven hours to defrag the volume before the data was purged. Now it only takes 5 minutes. Is there any issue with disabling this service?",
+        "expected_answer": "Turning the service off will disable Windows error reporting and you will not be able to get solutions for problems happening on the machine. There should be no other issues with disabling the service."
+    },
+    {
+        "question": "Does IIS 7.0 record compressed or uncompressed (or both) bytes in site log files?",
+        "expected_answer": "The *response* size is recorded, so if a 100 KB ASPX response gets compressed to 50 KB, you see 50 KB in the log file. There must be some way of measuring bandwidth savings, because ms.com measured this once."
+    },
+    {
+        "question": "If I am installing Windows 7 on Skylake, which configuration should be chosen? Should the firmware CSM be enabled with UEFI boot (Config #2) or legacy boot MBR (Config #3)? If Legacy boot mode, why?",
+        "expected_answer": "Specifically, for Windows 7 it is recommended to use Config #2. You will need to enable the CSM and set default to UEFI boot, falling back to legacy boot only if needed. Secure Boot will need to be disabled. \n Windows 7 is not able to support Config #1. Windows 7 has a dependency on Int10 support for basic display when the high-res graphics driver is not available (for example, Bugcheck, Sleep transitions, etc.), a dependency satisfied by the CSM. You can boot Win7 in UEFI mode if a partial CSM is in place (enabled) providing Int10 support. If firmware defaults to UEFI boot mode leaving Int10 CSM enabled, then Win7 will install successfully in UEFI mode. Microsoft has also backported TPM 2.0 support to Windows 7 for when it is installed in UEFI mode. For more information, see this KB article:  KB2920188 . \n Microsoft recommends you should use Config #2; Legacy MBR Boot mode should not be used."
+    },
+    {
+        "question": "If I installed Windows 7 with CSM enabled, what will the partition table/disk configuration look like?",
+        "expected_answer": "It depends on the boot devices priority defaults in firmware. If CSM is enabled and loaded into memory, this can sometimes cause install media to default to Legacy MBR boot. \n If you boot to legacy boot mode and go through installation you will typically have 2 partitions (as listed with diskpart.exe \"list partition\"). The first partition being active and listed as \u00e2\u0080\u0098system partition\u00e2\u0080\u0099, file system type being NTFS with a hidden \\boot folder. The second partition is where \\Windows is installed on another NTFS partition. \n If Windows is installing in UEFI mode, installation will create the EFI System Partition (ESP) as file system type Fat32, the Microsoft Reserve Partition (MSR) as RAW, and an OS / data partition using NTFS. If you mount and look at the ESP, you should see a folder \\EFI boot folder (folder may be hidden). \n Since you will need to leave CSM enabled in the system firmware for Windows 7, you may need to specifically select UEFI boot mode when booting to installation media (CD/DVD/USB) in order to install Windows 7 in UEFI boot mode.\nConsult with PC manufacture for more information concerning boot options and BIOS configuration."
+    },
+    {
+        "question": "If I am installed Windows 7 with the CSM enabled in Legacy boot mode (Config #3), what is the upgrade path?",
+        "expected_answer": "Upgrade path for this configuration (Config #3) is still supported through Windows 10. Though you will not be able to use Secure Boot as it is only available in UEFI Config # 1. If you desire to switch the system to UEFI boot, you will need to format and re-install the original operating system with disk partitioned for GPT disk using UEFI boot mode. You will not need to keep the CSM enabled during this transition unless you need to boot to Windows 7 for the upgrade (Config #2) if you are upgrading from Windows store or an online installation.\nIt is recommended to go straight to Config #1 (with the CSM disabled) for a pure UEFI environment, this is to make use of Secure Boot if firmware supports it."
+    },
+    {
+        "question": "Is there any user impact when switching the Firmware from CSM enabled with Legacy BIOS boot (Config #3) to CSM enabled UEFI boot (Config #2) and back?",
+        "expected_answer": "This depends on how you go about switching. If you change from Config #3 to Config #2, then attempt to boot, system may not boot. If you change back to Config #3 at this point, WITHOUT ANY FURTHER CHANGES TO SYSTEM, DISK or OS. Than you should be able to boot back into original OS, using the original Config #n. The recommendation is to  not  change the BIOS setting and instead upgrade \"as-is\"."
+    },
+    {
+        "question": "Change from Config #2 to Config #1 to enable Secure Boot:",
+        "expected_answer": "For newer systems; post 2015 (Skylake), and if system has CSM enabled, with Secure Boot disabled (they should be mutually exclusive) and OS is installed using UEFI boot method to GPT disk. After upgrading to Win10+, it should be a straightforward process of turning off the CSM and enabling Secure Boot in Firmware (if Secure Boot was setup in the factory and is an option in firmware). \n If after making the changes, the system is not able to boot, then system is more than likely configured to boot using CSM\u00e2\u0080\u0099s legacy BIOS for boot. If this is the case, this will require either Win10+ installation media, or a clean install of the original operating system (Windows 7). Ensuring that the CSM is enabled and installation/disk partition is set for UEFI boot mode which would later allow upgrade to Win10 in UEFI boot mode. \n Be sure to select UEFI boot to install media, firmware configuration may require further BIOS setting changes in order to boot to UEFI installation. \n Consult with PC manufacture for more information concerning boot options and BIOS configuration."
+    },
+    {
+        "question": "User is running Windows 7, before upgrade to Win 10, BIOS/Firmware is switched to UEFI.",
+        "expected_answer": "Assuming that operating system was previously installed in Legacy BIOS boot mode: \n If the person who is installing Windows 10 goes through installation/setup. Windows setup will detect disk in Legacy MBR BIOS boot mode and attempt to install accordingly. Results may vary depending on system, boot method, installation media (if customized). However, you may get a message that the disk format is unsupported with this boot method. If you get this message it will be easy to format the disk and install fresh. WARNING, if you do format the disk you will  lose  any data that was on the disk. \n Recommendations are to change settings back to what they were prior to switching. This is so you can boot to the already installed operating system. Backup any data that you wish to save to an external storage location. Then go about re-provisioning the disk (clean the hard disk of existing partitions, boot to media in UEFI mode and perform fresh install to GPT disk). \n Caution; if you leave the CSM enabled, as in Config #2, there is a possibility that installation media may default to MBR boot. If operating system is installed in Legacy MBR boot mode. You will not be able to enable Secure Boot without again reprovisioning the disk and installing the operating system in UEFI Boot mode to GPT disk. You may wish to consult with PC manufacture for more information concerning boot options, BIOS configuration options as well as firmware updates and Secure Boot options."
+    },
+    {
+        "question": "Does UEFI support booting from a MBR partitioned disk?",
+        "expected_answer": "No, booting from a MBR partitioned disk is only supported when booting in BIOS mode. If CSM is present and enabled, then legacy boot should be supported leveraging CSM\u00e2\u0080\u0099s legacy BIOS boot method."
+    },
+    {
+        "question": "What is the dependency on 32-bit vs. 64-bit UEFI?",
+        "expected_answer": "Microsoft does support both 32 and 64 bit UEFI. The bitness of the OS and the UEFI firmware must match. (for example, if you have a 64-bit UEFI firmware then you must install 64-bit Windows OS)."
+    },
+    {
+        "question": "Can you programmatically switch firmware settings?",
+        "expected_answer": "No, most firmware settings are not standardized, and Microsoft does not offer a tool to allow a means to programmatically modify firmware settings. Consult with PC manufacture for details as there may be tools available for management and configuration."
+    },
+    {
+        "question": "How does switching from CSM enabled Legacy BIOS boot (Config #3) to CSM enabled UEFI boot (Config #2) impact Secure Boot behavior?",
+        "expected_answer": "Secure Boot is only supported in UEFI mode with the CSM disabled. If Secure Boot was not pre-configured on the factory floor prior to system shipping out to customers, then you will probably not have the option available to you. If the system did previously have Secure Boot enabled, but disabled for current Windows 7 OS (using downgrade rights) then it may be as simple as disabling the CSM and enabling Secure Boot. However, if partition was cleaned and you are not setup for UEFI boot to GPT disk. Then you will need to clean the disk and re-install the operating system for UEFI boot prior to turning on Secure Boot. \n Consult with the original equipment manufacturer (OEM) prior to making any changes to ensure your system supports secure boot. \n Note  Cleaning the disk will destroy any data that is on that disk even if in other partitions."
+    },
+    {
+        "question": "Any dependency on BitLocker and Non-Microsoft disk encryption tools?",
+        "expected_answer": "Yes, switching UEFI/Legacy BIOS boot will likely cause boot to fail, and switching Firmware settings back to defaults should allow recovery. Suspending bitlocker, and in some cases, disabling Bitlocker or non-MS encryption tools would be recommended depending on if switching requires wiping the drive or just changing firmware settings (such as CSM/Secure boot) \n Consult with PC or software Manufacture for more information about configuration and defaults."
+    },
+    {
+        "question": "How is Secure Boot configured once the BIOS is switched to UEFI?",
+        "expected_answer": "By default, for Win7 devices, Secure Boot is not implemented. If a system came with Windows 8 or higher, it's very likely that system would have Secure Boot configured as this was a Logo requirement. Secure Boot is only implemented on factory floor by the PC manufacturer. Please contact the PC manufacturer to see if they would be able to install Secure Boot on your system. You may need to send system back to PC manufacture to get this installed."
+    },
+    {
+        "question": "What is impact on a rollback/restore to Windows 7?",
+        "expected_answer": "As long as there were no changes to firmware settings, rollback to original operating system should work. If firmware settings were changed, change them back to factory default (what they were prior to rollback). Consult with PC manufacture to find out what type of rollback method or recovery method is included with system."
+    },
+    {
+        "question": "What is the impact to WinRE?",
+        "expected_answer": "WinRE is going to have the same boot process as the installed operating system. If you changed the firmware boot option (Legacy BIOS to UEFI) than attempting to boot to operating system or WinRE on disk will now fail. If you are booting to WinRE or WinPE on USB/CD/DVD, this will use a separate boot method."
+    },
+    {
+        "question": "What is dependency/impact on 32-bit vs. 64-bit OS going from Legacy boot to UEFI and vice versa if the firmware is 64-bit UEFI or 32-bit UEFI?",
+        "expected_answer": "One limitation of Windows UEFI boot is that you can only boot an OS \"bitness\" that matches the UEFI that is installed (see Question 7). If you have a 32-bit UEFI, you can only install a 32-bit Windows on it. 64-bit Windows requires 64-bit UEFI or a CSM. However, if a system is missing a CSM, you cannot boot Win7 64-bit Windows OS."
+    },
+    {
+        "question": "Can you convert a system booting using Legacy MBR boot to GPT boot on the fly without impacting data?",
+        "expected_answer": "No. Using Microsoft tools such as diskpart.exe will result in data loss. MBR boot and GPT boot are two different booting mechanisms that require a change to the disk that will remove all data from the disk in order to implement this change. Backup any data prior to attempting to make this change."
+    },
+    {
+        "question": "Why am I unable to view my analytics data in Partner Center?",
+        "expected_answer": "When I access the analytics pages, I see the following message.  Why you might be seeing this message:"
+    },
+    {
+        "question": "I know I have analytics data, so why does the No Analytics Available message appear?",
+        "expected_answer": " Why you might be seeing this message:"
+    },
+    {
+        "question": "How do I enroll in the commercial marketplace?",
+        "expected_answer": "There are two ways to create an account:"
+    },
+    {
+        "question": "Where can I create a commercial marketplace offer?",
+        "expected_answer": "\n Go to the commercial marketplace offers  Overview page . \n Select  + New offer . \n Select the type of offer to create. \n"
+    },
+    {
+        "question": "I can't register and publish an offer using my personal email ID.",
+        "expected_answer": "Learn how to create, publish, and manage your offers, SeePublishing guide by offer type."
+    },
+    {
+        "question": "What roles are required to view commercial marketplace analytics?",
+        "expected_answer": "To learn more about roles required to view commercial marketplace analytics reports, seeAssign user roles and permissions."
+    },
+    {
+        "question": "Can I view ratings and review of my offers listed in the Microsoft 365 and Copilot program?",
+        "expected_answer": "No, currently we only provide ratings and reviews reporting to offers listed in the commercial marketplace program. For more information, seeRatings and Reviews dashboard for the commercial marketplace. Reviews and ratings of Office apps will be available soon. Commercial marketplace offers are listed on Microsoft AppSource and Azure Marketplace. They include Azure applications, Azure containers, Azure virtual machines, Dynamics 365 apps on Dataverse and Power Apps, Dynamics 365 Operations Apps, Containers, and Software as a Service."
+    },
+    {
+        "question": "Why do I see daily adjustments to estimated charges in my usage report?",
+        "expected_answer": "The billed charges for current customer usage in an open month can have adjustments due to things like discounts and refunds. The accurate estimated charges in the usage report are reflected on the fourth day of the month following use of the offer."
+    },
+    {
+        "question": "How do I get started with programmatic access to commercial marketplace analytics reports?",
+        "expected_answer": "SeePrerequisites to programmatically access analytics data."
+    },
+    {
+        "question": "Can I create custom queries apart from the listed system queries?",
+        "expected_answer": "Yes, the system queries are only for reference purposes. You can either use system queries or create a custom query by selectively querying on specific attributes."
+    },
+    {
+        "question": "Is gross revenue the billed sales or amount invoiced to customers?",
+        "expected_answer": "Gross revenue is the amount billed to the customer who purchased an offer or consumed services. This amount is shown in customer invoice against the transaction."
+    },
+    {
+        "question": "What do different payout status mean?",
+        "expected_answer": "This list defines the different payout status:"
+    },
+    {
+        "question": "What is the difference between Revenue, EarningAmount and TransactionAmount?",
+        "expected_answer": "Revenue column shows the billed sales amount. This is shown in customer invoice.\nTransactionAmount column shows the amount that customers paid to Microsoft against the invoice. If the customer made partial payment, then Revenue and TransactionAmount could be different.\nEarningAmount column shows the amount that is considered for payout. This amount is calculated after deducting listing fees."
+    },
+    {
+        "question": "Is Purchase record ID the same as Order ID in the Earnings report?",
+        "expected_answer": "Yes, the Purchase record ID refers to the same \"Order ID\" data field."
+    },
+    {
+        "question": "Why is customer information blank in many rows of the revenue report?",
+        "expected_answer": "Customer information such as email or customer name could be blank due to a customer not providing consent to share their personally identifiable information. In some cases, this could be due to a known technical limitation being addressed."
+    },
+    {
+        "question": "Does customerName column represent bill to account, the end-customer, or the reseller information?",
+        "expected_answer": "The CustomerName column represents the end-customer's details. Refer to the reseller related columns for reseller information."
+    },
+    {
+        "question": "Can the revenue dashboard show who is the end-user customer, the reseller, and the distributor?",
+        "expected_answer": "Yes, customer related columns show the end-customer's details. Refer the Reseller related columns to get reseller information if a reseller was involved in the transaction."
+    },
+    {
+        "question": "Do we have \"ship-to\" address information (country/region, state, city, zip code) in the revenue dashboard?",
+        "expected_answer": "Yes, the download report has details for end-customer. Refer the customer related columns like CustomerCity, CustomerState, CustomerCountry, CustomerPostalCode."
+    },
+    {
+        "question": "How does the first-free month appear in the report?",
+        "expected_answer": "If a partner selects offer listing as \"Free\" as the dashboard filter, all offer purchases or consumption with free trial is displayed in the dashboard with revenue for the first month as $0."
+    },
+    {
+        "question": "Is there a suggested specific date for us to download the reports every month?",
+        "expected_answer": "Yes. You can download the reports on the Seventh day of each month to view accurate revenue figures for the offer purchases and consumption from the previous month. For example, if a customer used a consumption or usage-based offer in the month of January, on February 7, you can download an accurate January-billed revenue report. Note Revenue figures for subscription-based products are available in the same month of purchase."
+    },
+    {
+        "question": "What does \"MonthStartDate\" refer to?",
+        "expected_answer": "MonthStartDate refers to the order purchase month or the offer usage month for which the revenue was calculated."
+    },
+    {
+        "question": "Why do I see a steep drop in revenue trend for current month?",
+        "expected_answer": "The steep drop could be due to the open month for usage-based offers for which revenue isn't yet generated."
+    },
+    {
+        "question": "Can I sort the records in the customer leaderboard and the geographic spread widget?",
+        "expected_answer": "Yes, you sort a column in the widget in ascending or descending order."
+    },
+    {
+        "question": "Why does the Revenue timeline not change for different month range selections?",
+        "expected_answer": "Revenue timeline view provides the eligible amount for last month and future month's payout. This widget doesn't change based on filters or period."
+    },
+    {
+        "question": "How do I download the revenue report through the UI?",
+        "expected_answer": "To download the reports, go to theInsights>Downloads Hubsection. Click onCreate new reportand selectMarketplace offerstile. You can now do the instant download or schedule a download. To learn more, seeDownloads hub."
+    },
+    {
+        "question": "Can I use an API to download data from the revenue dashboard?",
+        "expected_answer": "Yes. To learn about the analytics APIs, seeGet started with programmatic access to analytics data."
+    },
+    {
+        "question": "Can I apply filters to the report?",
+        "expected_answer": "Yes. You can use the dashboard filters to view the widgets on the dashboard based on the filtered criteria you choose."
+    },
+    {
+        "question": "How can we reconcile this revenue report to the Earnings report?",
+        "expected_answer": "To reconcile with Earnings report use purchaseRecordID, lineItemID, and EarningID in the revenue report as the unique identifier. See this information on thedata dictionary."
+    },
+    {
+        "question": "Why do I see discrepancy in reconciling revenue report to the Earnings report?",
+        "expected_answer": "Revenue report has the latest Earning data for a PurchaseRecordId. Check Net \"TransactionAmount\" for the Purchase Record in the complete earning report and it should match with \"Revenue\" amount in Revenue report."
+    },
+    {
+        "question": "What is the relationship between the timing of the revenue report and the usage report? If the revenue report is based on billing, would we compare the current month revenue report to the prior month usage or the current month usage?",
+        "expected_answer": "Revenue report for current month captures the billed amount for previous month offer consumption or usage. You can download the revenue report on or after the seventh of every month to verify accurate revenue figures for the customer's offer usage in the previous month."
+    },
+    {
+        "question": "How is the estimated payout month determined?",
+        "expected_answer": "See the payout schedules for Enterprise agreement, Microsoft customer agreement, or CSP transactions atPayout schedules and processes."
+    },
+    {
+        "question": "How should I be using this dashboard?",
+        "expected_answer": "This dashboard helps business teams understand customer behavior in terms of retention and churn after a customer has deployed your marketplace offer. Use it to answer questions like, \"How many customers am I retaining, and for how long?\" and \"Compared to other offers in a category, are my retention numbers good or bad?\" Use the monthly tab to look at a group of users over a longer time frame. For example, if you run a promotional campaign in a certain month, you can see whether that month had higher retention than months when you didn't run the campaign."
+    },
+    {
+        "question": "What insights can I get from this dashboard?",
+        "expected_answer": "Discover whether customers are continuing to use your VM offer over a period of time and whether they churn right away. When you identify which customers are churning, you can contact them or include them in a campaign. Determine if your investments in marketing are working: the monthly view shows if months when you ran campaigns out-perform months when you didn't."
+    },
+    {
+        "question": "The retention widget looks like it's showing me 45 days of data. What day is it counting from?",
+        "expected_answer": "ReadRetained customersin theCustomer retention dashboard. The data shown here's a normalized view of 18 months of customer data, and so isn't \"to\" or \"from\" a specific date."
+    },
+    {
+        "question": "Can I filter the graphs to show a specific date range?",
+        "expected_answer": "No. As the documentation indicates, it's a normalized view of 18 months of data. The retentionheat mapshows monthly views, but you can't filter to specific dates."
+    },
+    {
+        "question": "What is the difference between Total offers and Offer count?",
+        "expected_answer": "Total offers refers to how many there are in the entire category. For example, if you set the \"category\" filter to security, it's showing how many offers there are in the marketplace under the category Security. Offer count shows the count of offers in the category whose retention scores are above zero. So if you have the Category filter set to Security, the Y axis of the graph is showing how many offers in security have retention scores above 0."
+    },
+    {
+        "question": "What is the green or red arrow on retention rank?",
+        "expected_answer": "The arrow shows the change in your retention rank. The time period is determined by the filter at the top; choose days, weeks, or months."
+    },
+    {
+        "question": "How do I know which customers are retaining and which are churning?",
+        "expected_answer": "Customersshows this information."
+    },
+    {
+        "question": "What does dormant mean?",
+        "expected_answer": "Dormant means a customer hasn't used that offer for several days. They aren't labeled Churned because they could reengage and start using the offer again."
+    },
+    {
+        "question": "I want to know about the orders or usage of these customers, but that data is in separate reports.",
+        "expected_answer": "The best way to get that information is to download details from the orders or usage reports and cross-check based on a shared field: customer name."
+    },
+    {
+        "question": "Why does the retention percentage sometimes fluctuate in the monthly waterfall view?",
+        "expected_answer": "Note the Cohort column. This tells you how many customers started using your offer in a month. If the column says 60 users in the cohort, then the percentage is calculated month-over-month by dividing the total number of users still using the offer by 60. If it's showing 35%, for example, that means 21 users are still using the offer. If the next month shows 40%, that means that three users came back (24/60). Retention percentages increase when users come back."
+    },
+    {
+        "question": "What does Cohort mean?",
+        "expected_answer": "A Cohort is the number of customers who started using your offer in a given month."
+    },
+    {
+        "question": "How do you define a customer?",
+        "expected_answer": "A customer is one billing account ID."
+    },
+    {
+        "question": "Can I filter this by a billing model? For example, can I see all my pay-as-you-go or bring-your-own-license offers in one view?",
+        "expected_answer": "No, you can only view one offer at a time."
+    },
+    {
+        "question": "Can I see the different SKUs/plans per offer?",
+        "expected_answer": "No, you can only look at the offer level."
+    },
+    {
+        "question": "Can I see this data quarterly?",
+        "expected_answer": "There's no quarterly filter. However, looking at the monthly view will help you see patterns over a quarterly time frame."
+    },
+    {
+        "question": "Do these views filter out internal users from my company who might be testing the offer?",
+        "expected_answer": "No, the only identifier available for these users would be email domain; we can't know with confidence whether or not they're internal to your company."
+    },
+    {
+        "question": "Do these views filter out trial users or customers who are only doing a trial of my product?",
+        "expected_answer": "No, the functionality to filter only paid customers isn't available yet."
+    },
+    {
+        "question": "Can we customize our sign-in page so it's more intuitive for our B2B collaboration guest users?",
+        "expected_answer": "Absolutely, for information about how to customize your organization's sign-in page, see  Add company branding to sign in and Access Panel pages ."
+    },
+    {
+        "question": "Can B2B collaboration users access SharePoint Online and OneDrive?",
+        "expected_answer": "Yes. However, the ability to search for existing guest users in SharePoint Online by using the people picker is  Off  by default. To turn on the option to search for existing guest users, set  ShowPeoplePickerSuggestionsForGuestUsers  to  On . You can turn this setting on either at the tenant level or at the site collection level. You can change this setting by using the Set-SPOTenant and Set-SPOSite cmdlets. With these cmdlets, members can search all existing guest users in the directory. Changes in the tenant scope don't affect SharePoint Online sites that have already been provisioned."
+    },
+    {
+        "question": "Can B2B collaboration users access Power BI content?",
+        "expected_answer": "Yes, you can  distribute Power BI content to external guest users using B2B collaboration . To share Power BI content across Microsoft clouds, you can  use Microsoft cloud settings  to establish mutual B2B collaboration between your cloud and an external cloud."
+    },
+    {
+        "question": "Is the CSV upload feature still supported?",
+        "expected_answer": "Yes. For more information about using the .csv file upload feature, see  this PowerShell sample ."
+    },
+    {
+        "question": "How can I customize my invitation emails?",
+        "expected_answer": "You can customize almost everything about the inviter process by using the  B2B invitation APIs ."
+    },
+    {
+        "question": "Can guest users reset their multifactor authentication method?",
+        "expected_answer": "Yes. Guest users can reset their multifactor authentication method the same way that regular users do."
+    },
+    {
+        "question": "Which organization is responsible for multifactor authentication licenses?",
+        "expected_answer": "The inviting organization performs multifactor authentication. The inviting organization must make sure that the organization has enough licenses for their B2B users who are using multifactor authentication."
+    },
+    {
+        "question": "What if a partner organization already has multifactor authentication set up? Can we trust their multifactor authentication?",
+        "expected_answer": "Cross-tenant access settings  let you trust multifactor authentication and device claims ( compliant claims and Microsoft Entra hybrid joined claims ) from other Microsoft Entra organizations."
+    },
+    {
+        "question": "How many organizations can I add in cross-tenant access settings?",
+        "expected_answer": "Cross-tenant access settings are a policy in the directory that stores your settings for how you collaborate with other organizations. There are no limits to the number of organizations you can add in cross-tenant access settings."
+    },
+    {
+        "question": "How can I use delayed invitations?",
+        "expected_answer": "An organization might want to add B2B collaboration users, provision them to applications as needed, and then send invitations. You can use the B2B collaboration invitation API to customize the onboarding workflow."
+    },
+    {
+        "question": "Can I make guest users visible in the Exchange Global Address List?",
+        "expected_answer": "Yes. By default, guest objects aren't visible in your organization's global address list, but you can make them visible. For details, see  Add guests to the global address list  in the Microsoft 365 per-group guest access article."
+    },
+    {
+        "question": "Can I make a guest user a limited administrator?",
+        "expected_answer": "Absolutely. For more information, see  Adding guest users to a role ."
+    },
+    {
+        "question": "Does Microsoft Entra B2B collaboration allow B2B users to access the Microsoft Entra admin center?",
+        "expected_answer": "Unless a user is assigned the role of limited administrator, B2B collaboration users won't require access to the Microsoft Entra admin center. However, B2B collaboration users who are assigned the role of limited administrator can access the portal. Also, if a guest user who isn't assigned one of these admin roles accesses the portal, the user might be able to access certain parts of the experience. The guest user role has some permissions in the directory."
+    },
+    {
+        "question": "Can I block access to the Microsoft Entra admin center for guest users?",
+        "expected_answer": "Yes, you can create a Conditional Access policy that blocks guest user access to the admin center or portal. When configuring the Conditional Access policy, you have granular control over the types of external users you want to apply the policy to. When you configure this policy, be careful to avoid accidentally blocking access to members and admins. Learn more about  Conditional Access for external users ."
+    },
+    {
+        "question": "Does Microsoft Entra B2B collaboration support multifactor authentication and consumer email accounts?",
+        "expected_answer": "Yes. Multifactor authentication and consumer email accounts are both supported for Microsoft Entra B2B collaboration."
+    },
+    {
+        "question": "Do you support password reset for Microsoft Entra B2B collaboration users?",
+        "expected_answer": "If your Microsoft Entra tenant is the home directory for a user, you can  reset the user's password  from the Microsoft Entra admin center. But you can't directly reset a password for a guest user who signs in with an account that's managed by another Microsoft Entra directory or external identity provider. Only the guest user or an administrator in the user\u00e2\u0080\u0099s home directory can reset the password. Here are some examples of how password reset works for guest users: \n \n Guest users in a Microsoft Entra tenant that are marked \"Guest\" (UserType==Guest) can't register for SSPR through  https://aka.ms/ssprsetup . These type of guest user can only perform SSPR through  https://aka.ms/sspr . \n \n Guest users who sign in with a Microsoft account (for example guestuser@live.com) can reset their own passwords using Microsoft account self-service password reset (SSPR). See  How to reset your Microsoft account password . \n \n Guest users who sign in with a Google account or another external identity provider can reset their own passwords using their identity provider's SSPR method. For example, a guest user with the Google account guestuser@gmail.com can reset their password by following the instructions in  Change or reset your password . \n \n If the identity tenant is a just-in-time (JIT) or \"viral\" tenant (meaning it's a separate, unmanaged Azure tenant), only the guest user can reset their password. Sometimes an organization will  take over management of viral tenants  that are created when employees use their work email addresses to sign up for services. After the organization takes over a viral tenant, only an administrator in that organization can reset the user's password or enable SSPR. If necessary, as the inviting organization, you can remove the guest user account from your directory and resend an invitation. \n \n If the guest user's home directory is your Microsoft Entra tenant, you can reset the user's password. For example, you might have created a user or synced a user from your on-premises Active Directory and set their UserType to Guest. Because this user is homed in your directory, you can reset their password from the Microsoft Entra admin center. \n \n"
+    },
+    {
+        "question": "Does Microsoft Dynamics 365 provide online support for Microsoft Entra B2B collaboration?",
+        "expected_answer": "Yes, Dynamics 365 (online) supports Microsoft Entra B2B collaboration. For more information, see the Dynamics 365 article  Invite users with Microsoft Entra B2B collaboration ."
+    },
+    {
+        "question": "What is the lifetime of an initial password for a newly created B2B collaboration user?",
+        "expected_answer": "Microsoft Entra ID has a fixed set of character, password strength, and account lockout requirements that apply equally to all Microsoft Entra cloud user accounts. Cloud user accounts are accounts that aren't federated with another identity provider, such as \n \n Microsoft account \n Facebook \n Active Directory Federation Services \n Another cloud tenant (for B2B collaboration) \n \n For federated accounts, password policy depends on the policy that is applied in the on-premises tenancy and the user's Microsoft account settings."
+    },
+    {
+        "question": "An organization might want to have different experiences in their applications for tenant users and guest users. Is there standard guidance for this? Is the presence of the identity provider claim the correct model to use?",
+        "expected_answer": "A guest user can use any identity provider to authenticate. For more information, see  Properties of a B2B collaboration user . Use the  UserType  property to determine user experience. The  UserType  claim isn't currently included in the token. Applications should use the Microsoft Graph API to query the directory for the user, and to get the UserType."
+    },
+    {
+        "question": "Where can I find a B2B collaboration community to share solutions and to submit ideas?",
+        "expected_answer": "We're constantly listening to your feedback, to improve B2B collaboration. Please share your user scenarios, best practices, and what you like about Microsoft Entra B2B collaboration. Join the discussion in the  Microsoft Tech Community . \n We also invite you to submit your ideas and vote for future features at  B2B Collaboration Ideas ."
+    },
+    {
+        "question": "Can we send an invitation that is automatically redeemed, so that the user is just \u00e2\u0080\u009cready to go\u00e2\u0080\u009d? Or does the user always have to click through to the redemption URL?",
+        "expected_answer": "You can invite other users in the partner organization by using the UI, PowerShell scripts, or APIs. You can then send the guest user a direct link to a shared app. In most cases, there's no longer a need to open the email invitation and click a redemption URL. See  Microsoft Entra B2B collaboration invitation redemption ."
+    },
+    {
+        "question": "How does B2B collaboration work when the invited partner is using federation to add their own on-premises authentication?",
+        "expected_answer": "If the partner has a Microsoft Entra tenant that is federated to the on-premises authentication infrastructure, on-premises single sign-on (SSO) is automatically achieved. If the partner doesn't have a Microsoft Entra tenant, a Microsoft Entra account is created for new users."
+    },
+    {
+        "question": "Can an Azure AD B2C local account be invited to a Microsoft Entra tenant for B2B collaboration?",
+        "expected_answer": "No. An Azure AD B2C local account can only be used to sign in to the Azure AD B2C tenant. The account can't be used to sign into a Microsoft Entra tenant. Inviting an Azure AD B2C local account to a Microsoft Entra tenant for B2B collaboration isn't supported."
+    },
+    {
+        "question": "What applications and services support Azure B2B guest users?",
+        "expected_answer": "All Microsoft Entra integrated applications can support Azure B2B guest users, but they must use an endpoint set up as a tenant to authenticate guest users. You might also need to  customize the claims  in the SAML token that is issued when a guest user authenticates to the app."
+    },
+    {
+        "question": "Can we force multifactor authentication for B2B guest users if our partners don't have multifactor authentication?",
+        "expected_answer": "Yes. For more information, see  Conditional Access for B2B collaboration users ."
+    },
+    {
+        "question": "In SharePoint, you can define an \"allow\" or \"deny\" list for external users. Can we do this in Azure?",
+        "expected_answer": "Yes. Microsoft Entra B2B collaboration supports allowlists and blocklists."
+    },
+    {
+        "question": "What licenses do we need to use Microsoft Entra B2B?",
+        "expected_answer": "For information about what licenses your organization needs to use Microsoft Entra B2B, see  External ID pricing ."
+    },
+    {
+        "question": "What happens if I invite a user whose email and UPN don\u00e2\u0080\u0099t match?",
+        "expected_answer": "It depends. By default, Microsoft Entra-only allows UPN for login ID. When UPN and email are the same, Microsoft Entra B2B invitations and subsequent sign-ins work as expected. However, issues can arise when a user\u00e2\u0080\u0099s email and UPN don\u00e2\u0080\u0099t match, and the email is used instead of the UPN to sign in.\nWhen a user is invited with a non-UPN email, they will be able to redeem the invitation if they redeem using the  email invitation link , but redemptions via a  direct link  will fail. However, even if the user successfully redeems the invitation, subsequent sign-in attempts using the non-UPN email will fail unless the identity provider (either Microsoft Entra ID or a federated identity provider) is configured to allow email as an alternative login ID.\nThis issue can be mitigated by: \n \n Enabling email as an alternate login ID  in the invited/home Microsoft Entra tenant \n Enabling the federated identity provider to support email as login ID (if Microsoft Entra ID is federated to another identity provider) or \n Instructing the user to redeem/sign-in using their UPN. \n \n To avoid this issue entirely, administrators should ensure users\u00e2\u0080\u0099 UPN and email are the same value. \n \n \n \n Note \n Invitations and redemptions being sent across Microsoft clouds must use UPN. Email is not supported at this time. For example, if a user from a US Government tenant is invited to a Commercial tenant, the user must be invited using their UPN. \n"
+    },
+    {
+        "question": "Instant-on: What can cause replication latency?",
+        "expected_answer": "In the B2B collaboration flows, we add users to the directory and dynamically update them during the invitation redemption process, app assignment, and so on. The updates and writes ordinarily happen in one directory instance and must be replicated across all instances. Replication is completed once all instances are updated. Sometimes when the object is written or updated in one instance and the call to retrieve this object is to another instance, replication latencies can occur. If that happens, refresh or retry to help. If you are writing an app using our API, then retries with some back-off is a good, defensive practice to alleviate this issue."
+    },
+    {
+        "question": "How often does cloud sync run?",
+        "expected_answer": "Cloud provisioning is scheduled to run every 2 mins. Every 2 mins, any user, group, and password hash changes are provisioned to Microsoft Entra ID."
+    }
+]
