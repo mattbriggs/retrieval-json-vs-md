@@ -1,0 +1,82 @@
+[
+        {
+            "question": "What is the deepest point in the Pacific Ocean?",
+            "expected_answer": "The Mariana Trench is the deepest point in the Pacific Ocean."
+        },
+        {
+            "question": "Which continent does the Pacific Ocean not touch?",
+            "expected_answer": "The Pacific Ocean does not touch Africa."
+        },
+        {
+            "question": "What is the largest ocean on Earth?",
+            "expected_answer": "The Pacific Ocean is the largest ocean on Earth."
+        },
+        {
+            "question": "Which country has the longest Pacific Ocean coastline?",
+            "expected_answer": "Canada has the longest Pacific Ocean coastline."
+        },
+        {
+            "question": "What natural phenomenon occurs in the Pacific Ocean due to tectonic activity?",
+            "expected_answer": "Earthquakes and tsunamis frequently occur in the Pacific Ocean due to tectonic activity."
+        },
+        {
+            "question": "What current affects the western coast of North America?",
+            "expected_answer": "The California Current affects the western coast of North America."
+        },
+        {
+            "question": "What is the name of the warm ocean current that influences global weather patterns?",
+            "expected_answer": "El Niño is the warm ocean current that influences global weather patterns."
+        },
+        {
+            "question": "Which large marine garbage patch is found in the Pacific Ocean?",
+            "expected_answer": "The Great Pacific Garbage Patch is found in the Pacific Ocean."
+        },
+        {
+            "question": "What is the name of the longest mountain range in the Pacific Ocean?",
+            "expected_answer": "The Mid-Pacific Mountains are part of the longest mountain range in the Pacific Ocean."
+        },
+        {
+            "question": "What famous explorer crossed the Pacific Ocean in 1521?",
+            "expected_answer": "Ferdinand Magellan crossed the Pacific Ocean in 1521."
+        },
+        {
+            "question": "What oceanic region is known for its frequent typhoons?",
+            "expected_answer": "The western Pacific Ocean is known for its frequent typhoons."
+        },
+        {
+            "question": "What large reef system is located in the Pacific Ocean?",
+            "expected_answer": "The Great Barrier Reef is located in the Pacific Ocean."
+        },
+        {
+            "question": "Which country has the most islands in the Pacific Ocean?",
+            "expected_answer": "Indonesia has the most islands in the Pacific Ocean."
+        },
+        {
+            "question": "Which famous battle of World War II took place in the Pacific Ocean?",
+            "expected_answer": "The Battle of Midway took place in the Pacific Ocean."
+        },
+        {
+            "question": "What is the primary cause of the Pacific Ocean’s high biodiversity?",
+            "expected_answer": "The Pacific Ocean's warm waters and diverse ecosystems contribute to its high biodiversity."
+        },
+        {
+            "question": "Which oceanic feature forms due to volcanic activity in the Pacific Ocean?",
+            "expected_answer": "Islands and atolls form due to volcanic activity in the Pacific Ocean."
+        },
+        {
+            "question": "What major oceanic trade route crosses the Pacific Ocean?",
+            "expected_answer": "The Trans-Pacific shipping route crosses the Pacific Ocean."
+        },
+        {
+            "question": "What is the main cause of the Pacific Ocean’s waves?",
+            "expected_answer": "Wind is the main cause of waves in the Pacific Ocean."
+        },
+        {
+            "question": "Which marine mammal is commonly found in the Pacific Ocean?",
+            "expected_answer": "The humpback whale is commonly found in the Pacific Ocean."
+        },
+        {
+            "question": "What oceanic region is home to many active volcanoes?",
+            "expected_answer": "The Pacific Ring of Fire is home to many active volcanoes."
+        }
+    ]

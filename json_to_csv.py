@@ -21,6 +21,6 @@ def convert_json_to_csv(json_file, csv_file):
     print(f"CSV file '{csv_file}' has been created successfully.")
 
 # Example usage
-json_file = "data.json"  # Change this to your actual JSON file path
-csv_file = "output.csv"   # Change this to your desired output file name
+json_file = "json_f1_result-vector-related.json"  # Change this to your actual JSON file path
+csv_file = "json_f1_result-vector-related.csv"   # Change this to your desired output file name
 convert_json_to_csv(json_file, csv_file)
