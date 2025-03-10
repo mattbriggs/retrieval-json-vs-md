@@ -21,13 +21,15 @@ If Docker is not installed, download and install it from the link above.
 
 Run the following command to pull and start Weaviate with OpenAI text vectorization:
 ```sh
-docker run -d --rm --name weaviate -e AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true \
-    -e PERSISTENCE_DATA_PATH=/var/lib/weaviate \
-    -e QUERY_DEFAULTS_LIMIT=25 \
-    -e ENABLE_MODULES=text2vec-openai \
-    -e OPENAI_APIKEY=<your-openai-key> \
-    -p 8080:8080 semitechnologies/weaviate:1.22.1
+docker run -d --name weaviate \
+  -e PERSISTENCE_DATA_PATH=/var/lib/weaviate \
+  -e OPENAI_APIKEY= "<your-openai-key>" \
+  -e ENABLE_MODULES=text2vec-openai \
+  -e QUERY_DEFAULTS_LIMIT=25 \
+  -e AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true \
+  -p 8080:8080 -p 50051:50051 semitechnologies/weaviate:latest  
 ```
+
 Replace `<your-openai-key>` with your OpenAI API key.
 
 To verify Weaviate is running, execute:
@@ -102,7 +104,7 @@ If occupied, stop the process or run Weaviate on a different port (`-p 9090:8080
 
 ## Clean up Docker
 
-### 🛑 **How to Clean Up Docker When You're Done** 🛑
+### **How to Clean Up Docker When You're Done**
 
 If you're finished with Weaviate or other Docker containers, follow these steps to **clean up your system** and **free up disk space**.
 
